@@ -40,4 +40,62 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 		return (0);
 }
 
+/**
+ * binary_tree_height - a function that measures
+ * the height of a binary tree
+ * @tree: pointer to the root node of the tree to measure the height
+ * Description:
+ * Return: height of tree
+ */
 
+size_t binary_tree_height(const binary_tree_t *tree)
+{
+	size_t left_height, right_height, height;
+
+	if (!tree)
+		return (0);
+
+	if (!tree->left)
+		left_height = 0;
+	else
+		left_height = 1 + binary_tree_height(tree->left);
+
+	if (!tree->right)
+		right_height = 0;
+	else
+		right_height = 1 + binary_tree_height(tree->right);
+
+	height = left_height > right_height ? left_height : right_height;
+
+	return (height);
+}
+
+/**
+ * binary_tree_size - a function that measures
+ * the size of a binary tree
+ * @tree: pointer to the root node of the tree to measure the size
+ * Description:
+ * Return: size of tree
+ */
+
+size_t binary_tree_size(const binary_tree_t *tree)
+{
+	size_t left_size, right_size, size;
+
+	if (!tree)
+		return (0);
+
+	if (!tree->left)
+		left_size = 0;
+	else
+		left_size = binary_tree_size(tree->left);
+
+	if (!tree->right)
+		right_size = 0;
+	else
+		right_size = binary_tree_size(tree->right);
+
+	size = left_size + right_size + 1;
+
+	return (size);
+}
